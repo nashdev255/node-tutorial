@@ -1,8 +1,10 @@
-const http = require('http')
-const fs = require('fs')
-const PORT = 8000
+const http = require('http');
+const fs = require('fs');
 
-const html = fs.readFileSync('./index.html')
+const hostname = '127.0.0.1';
+const PORT = 3000;
+
+const html = fs.readFileSync('./index.html');
 
 const server = http.createServer((req, res) => {
     res.writeHead(200, { "Content-Type": "text/html" });
@@ -13,6 +15,8 @@ const server = http.createServer((req, res) => {
     if(req.method == 'DELETE') console.log("DELETE received");
 
     res.end();
-})
+});
 
-server.listen(PORT, null)
+server.listen(PORT, () => {
+    console.log(`Server running at http://${ hostname }:${ PORT }/`);
+});
